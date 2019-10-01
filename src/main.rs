@@ -1,14 +1,14 @@
 use std::fs::{self, File};
-use std::path::PathBuf;
 use std::io::{self, Read, Write};
+use std::path::PathBuf;
 use std::process;
 use structopt::StructOpt;
 
 static HELP_TEXT: &'static str =
     "O [n]\t- Open file with name\tL [l-l]\t- List contents in range\n\
-    A\t- Append\t\tE <l>\t- Edit line\n\
-    S [n]\t- Save with name\tQ\t- Quit without saving\n\
-    C\t- Start new file\tH\t- Display this help\n";
+     A\t- Append\t\tE <l>\t- Edit line\n\
+     S [n]\t- Save with name\tQ\t- Quit without saving\n\
+     C\t- Start new file\tH\t- Display this help\n";
 
 /// A very simply line-based text editor.
 #[derive(StructOpt)]
@@ -84,7 +84,7 @@ fn save_file(buffer: &str, name: Option<&str>, cfg: &Config) -> io::Result<()> {
     let name = match (name, cfg.file.clone()) {
         (Some(path), _) => path,
         (_, Some(path)) => path,
-        _               => {
+        _ => {
             eprintln!("No file name specified");
             return Ok(());
         },
@@ -168,13 +168,15 @@ fn list_file(buffer: &str, range: Option<&str>) {
         let lower = lower.unwrap();
         let upper = upper.unwrap();
 
-        buffer.lines()
+        buffer
+            .lines()
             .skip(lower)
             .take(upper - lower)
             .enumerate()
             .for_each(|(c, l)| println!("{:4}| {}", c, l));
     } else {
-        buffer.lines()
+        buffer
+            .lines()
             .enumerate()
             .for_each(|(c, l)| println!("{:4}| {}", c, l));
     }
