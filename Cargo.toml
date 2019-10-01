@@ -1,0 +1,11 @@
+[package]
+name = "lbl"
+description = "A very simple line-based text editor"
+license = "MIT"
+version = "0.1.0"
+authors = ["vzwGrey <vzwgrey@gmail.com>"]
+edition = "2018"
+publish = false
+
+[dependencies]
+structopt = "0.3.2"
